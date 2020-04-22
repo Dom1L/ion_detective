@@ -4,7 +4,7 @@ import sys
 import time
 
 anions = ['Acetate', 'Carbonate', 'Iodide', 'Nitrate', 'Phosphate', 'Sulphate']
-cations = ['Aluminum', 'Calcium', 'Copper', 'IronII', 'IronIII', 'Cobalt', 'Nickle', 'Potassium', 'Sodium']
+cations = ['Aluminum', 'Calcium', 'Copper', 'IronII', 'IronIII', 'Cobalt', 'Nickel', 'Potassium', 'Sodium']
 
 
 def _obfuscator(secret, compare):
