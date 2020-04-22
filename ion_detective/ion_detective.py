@@ -144,30 +144,59 @@ class IonDetective:
             print('Nothing seems to happen...')
 
     def test_aluminum(self):
-        print('Ca. 2 mL Probenlösung werden mit 0.5 mL verdünnter Salzsäure R und etwa 0.5 mL Thioacetamid-Reagenz versetzt. '
-              'Evtl auftretender Niederschlag wird abdekantiert. '
-              'Nach tropfenweisem Zusatz von verdünnter NaOH-Lösung R zur Lösung entsteht ein weisser, gallertartiger Niederschlag, '
-              'der sich bei weiterem Zusatz von NaOH wieder löst. Bei allmählichem Zusatz von Ammoniumchlorid-Lösung R bildet sich '
-              'wieder ein weisser, gallertartiger Niederschlag.')
+        print('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL tioacetamid reagent. '
+              'Occuring precipitate is being filtered.'
+              'You start adding drops of diluted NaOH solution.')
+
+        if 'Aluminum' in self._ion_probe:
+            print('You can see a gelatinous precipitate. It dissolves once you add more NaOH.'
+                  'After adding ammonium chloride solution, you can see the white gelatinous precipitate forming again.')
+        else:
+            print('You add more and more solution, but nothing seems to happen (besides the change in pH).')
 
     def test_iron2(self):
-        print('After addition of 1 mL potassium hexacyanoferrate (III) solution 0.125M to the sample solution, '
-              'a deep blue precipitate is formed which does not dissolve even afteraddition of 5 ml of diluted hydrochloric acid R1.')
+        print('You add 1 mL of potassium hexacyanoferrate (III) solution 0.125M to your sample solution.')
+
+        if 'IronII' in self._ion_probe:
+            print('You can see a deep blue precipitate forming. '
+                  'Even adding 5mL diluted HCL does not seem to dissolve the precipitate.')
+        else:
+            print('Nothing seems to happen...')
 
     def test_iron3(self):
-        print('After addition of 1 mL potassium hexacyanoferrate (III) solution 0.125M to the sample solution, '
-              'a deep blue precipitate is formed which does not dissolve even afteraddition of 5 ml of diluted hydrochloric acid R1.')
+        print('You mix a few drops of sample solution with a drop of KSCN solution.')
+
+        if 'IronIII' in self._ion_probe:
+            print('The colour of the solution turned red!')
+        else:
+            print('No colour change is observable...')
 
     def test_cobalt(self):
-        print('In a test tube, add a few drops of a neutral or acetic acid sample solution with a little KSCN or NH4SCN.')
+        print('You add a little KSCN to your sample solution.')
+
+        if 'Cobalt' in self._ion_probe:
+            print('The colour changes to blue!')
+        else:
+            print('Nothing seems to happen...')
 
     def test_nickel(self):
-        print('Ni2−forms with hydroxide ions a hardly soluble greenish deposit of Ni(OH)2.')
+        print('You add NaOH to your sample solution.')
+
+        if 'Nickel' in self._ion_probe:
+            print('You can observe a green precipitate forming.')
+        else:
+            print('Nothing seems to happen...')
 
     def test_potassium(self):
-        print('A clear solution of the sample substance is mixed with approx. 1 mL of perchloricacid and heated carefully. '
-              'Careful!! Do not overheat. Do not evaporate until dry.Risk of explosion!'
-              'After cooling, white potassium perchlorate crystallizes')
+        print('You mix approx. 1 mL of perchloricacid to your sample substance.'
+              'In the next step you have to heat the solution...')
 
-    def separate_urotropine_group(self):
-        pass
+        heating = input('Heat the solution fast or slow? ')
+        if heating == 'fast':
+            return print('Congratulations! You did not read the instructions and blew up the laboratory. '
+                         'This is not good...')
+
+        if 'Potassium' in self._ion_probe:
+            print('After cooling, you see white crystals forming. What could that be?')
+        else:
+            print('You let the solution cool down, but nothing happened.')
