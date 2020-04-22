@@ -1,6 +1,6 @@
 import random
 
-from ion_detective.utils import anions, cations, decision
+from ion_detective.utils import anions, cations, decision, print_slow
 
 
 class IonDetective:
@@ -23,24 +23,44 @@ class IonDetective:
         for ion in your_solutions:
             if ion in self._ion_probe:
                 points += 1
-        print(f'You achieved {points} out of 3 points!')
+        print_slow(f'You achieved {points} out of 3 points!')
+
+    def list_anion_tests(self):
+        print_slow('test_acetate(), \n'
+              'test_carbonate(), \n'
+              'test_iodide(), \n'
+              'test_nitrate(), \n'
+              'test_sulphate()'
+              )
+
+    def list_cation_tests(self):
+        print_slow('test_copper(), \n'
+              'test_calcium(), \n'
+              'test_sodium(), \n'
+              'test_aluminum(), \n'
+              'test_iron2(), \n'
+              'test_iron3(), \n'
+              'test_cobalt(), \n'
+              'test_nickel(), \n'
+              'test_potassium()'
+              )
 
     # Anion Test
     def test_acetate(self):
-        print('A spatula tip of the substance has to be rubbed into the mortar with KHSO4.')
+        print_slow('A spatula tip of the substance has to be rubbed into the mortar with KHSO4.')
 
         value = input('How much KHSO4 do you want to add? x times more than substance: x?')
         if int(value) < 4:
-            return print('You smell nothing...')
+            return print_slow('You smell nothing...')
 
         if 'Acetate' in self._ion_probe:
-            print('It smells like vinegar....')
+            print_slow('It smells like vinegar....')
         else:
-            print('You smell nothing...')
+            print_slow('You smell nothing...')
 
     def test_carbonate(self):
         random_failure = 0
-        print('You have to mix your substance with a couple of drops of HCl 2M.')
+        print_slow('You have to mix your substance with a couple of drops of HCl 2M.')
         mg_value = input('How much substance do you use? Mg: ')
         drop_value = input('How many drops of 2M HCL do you use? Approximate amount of drops: ')
 
@@ -49,32 +69,33 @@ class IonDetective:
         if not 5 <= int(drop_value) <= 10:
             random_failure += 0.3
 
-        print('The test tube is quickly sealed with a stopper,  '
+        print_slow('The test tube is quickly sealed with a stopper,  '
               'which  carries  a  gas  absorptiontube (filled with barium hydroxide solution).')
 
         if 'Carbonate' not in self._ion_probe or decision(random_failure):
-            return print('Nothing seems to happen...')
+            return print_slow('Nothing seems to happen...')
         else:
-            print('The mixture flares up and delivers acolorless and odourless gas.  '
+            print_slow('The mixture flares up and delivers acolorless and odourless gas.  '
                   'When slightly heated, a white precipitate is formed which dissolves in excess hydrochloric acid.')
 
     def test_iodide(self):
         random_failure = 0
-        print('Dissolve a spatula tip of the sample substance in x mL water and acidify it with diluted nitric acid 2M.')
+        print_slow(
+            'Dissolve a spatula tip of the sample substance in x mL water and acidify it with diluted nitric acid 2M.')
         ml_value = input('How much water do you want to add? mL: ')
         if int(ml_value) != 2:
             random_failure += 0.2
 
-        print('After adding a few drops of silver nitrate 0.25M, shake and let stand.')
-        print('After waiting a couple of minutes, you add 1.5 mL NH3-solution 10M.')
+        print_slow('After adding a few drops of silver nitrate 0.25M, shake and let stand.')
+        print_slow('After waiting a couple of minutes, you add 1.5 mL NH3-solution 10M.')
 
         if 'Iodide' not in self._ion_probe or decision(random_failure):
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
         else:
-            print('You see a pale yellow precipitate. You start shaking heavily, but it does not seem to dissolve.')
+            print_slow('You see a pale yellow precipitate. You start shaking heavily, but it does not seem to dissolve.')
 
     def test_nitrate(self):
-        print('In a test tube a few drops of your sample solution are mixed with about the same amount of '
+        print_slow('In a test tube a few drops of your sample solution are mixed with about the same amount of '
               'cold saturated iron (II) sulphate solution and acidified with slightly diluted sulphuric acid. '
               'Then carefully undercoated with concentrated sulphuric acid.'
               ' To  do this, suck a Pasteur pipettefull, place it on the bottom of the RG and slowly squeeze the H2SO4 out. '
@@ -83,120 +104,124 @@ class IonDetective:
               '(otherwise  sample  solution  is  drawn  in  and  thephase boundary may be destroyed')
 
         if 'Nitrate' not in self._ion_probe:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
         else:
-            print('You can observe a brown-ish ring form at the phase boundary.')
+            print_slow('You can observe a brown-ish ring form at the phase boundary.')
 
     def test_phosphate(self):
         random_failure = 0
-        print('A spatula tip of substance has to be dissolved in 1 mL of water, acidified with diluted HNO3 and mixed with'
-              '2 mL molybdate-vanadate.')
+        print_slow(
+            'A spatula tip of substance has to be dissolved in 1 mL of water, acidified with diluted HNO3 and mixed with'
+            '2 mL molybdate-vanadate.')
 
         yes_no = input('Make a new batch of molybdate-vanadate? Yes/No: ')
         if yes_no is 'No':
             random_failure += 0.66
 
         if 'Phosphate' in self._ion_probe or decision(random_failure):
-            print('A yellow colouring occures. You slowly heat the solution and the colour intensifies!')
+            print_slow('A yellow colouring occures. You slowly heat the solution and the colour intensifies!')
         else:
-            print('The colour of your solution does not seem to change at all...')
+            print_slow('The colour of your solution does not seem to change at all...')
 
     def test_sulphate(self):
-        print('You start with approx. 3 mL sample solution. You are unsure whether you have to acidify or basify your solution')
+        print_slow(
+            'You start with approx. 3 mL sample solution. You are unsure whether you have to acidify or basify your solution')
 
         acid_base = input('Acidify/Basify: ')
         if acid_base is 'Basify':
-            return print('You add NaOH and mix with 1 mL barium (II) chloride solution 0.25M, but nothings seems to happen...')
+            return print_slow(
+                'You add NaOH and mix with 1 mL barium (II) chloride solution 0.25M, but nothings seems to happen...')
         else:
-            print('You acidify your solution with diluted hydrochloric acid 2M and mix with 1 mL barium (II) chloride solution 0.25M.')
+            print_slow(
+                'You acidify your solution with diluted hydrochloric acid 2M and mix with 1 mL barium (II) chloride solution 0.25M.')
 
         if 'Sulphate' in self._ion_probe:
-            print('You can see a white precipitate!')
+            print_slow('You can see a white precipitate!')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     # Cation Test
     def test_copper(self):
-        print('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
+        print_slow('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
               'some of the substance is absorbed and kept in the burner flame.')
 
         if 'Copper' in self._ion_probe:
-            print('You can see a green flame!')
+            print_slow('You can see a green flame!')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_calcium(self):
-        print('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
+        print_slow('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
               'some of the substance is absorbed and kept in the burner flame.')
 
         if 'Calcium' in self._ion_probe:
-            print('You can see a brick-red flame! That has to mean something...')
+            print_slow('You can see a brick-red flame! That has to mean something...')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_sodium(self):
-        print('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
+        print_slow('A magnesia stick is annealed in the Bunsen burner flame. With the still hot rod, '
               'some of the substance is absorbed and kept in the burner flame.')
 
         if 'Sodium' in self._ion_probe:
-            print('You can see a yellow flame, what could that be?')
+            print_slow('You can see a yellow flame, what could that be?')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_aluminum(self):
-        print('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL tioacetamid reagent. '
-              'Occuring precipitate is being filtered.'
-              'You start adding drops of diluted NaOH solution.')
+        print_slow('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL thioacetamid reagent. \n'
+              'Occuring precipitate is being filtered. \n'
+              'You start adding drops of diluted NaOH solution. \n')
 
         if 'Aluminum' in self._ion_probe:
-            print('You can see a gelatinous precipitate. It dissolves once you add more NaOH.'
+            print_slow('You can see a gelatinous precipitate. It dissolves once you add more NaOH.'
                   'After adding ammonium chloride solution, you can see the white gelatinous precipitate forming again.')
         else:
-            print('You add more and more solution, but nothing seems to happen (besides the change in pH).')
+            print_slow('You add more and more solution, but nothing seems to happen (besides the change in pH).')
 
     def test_iron2(self):
-        print('You add 1 mL of potassium hexacyanoferrate (III) solution 0.125M to your sample solution.')
+        print_slow('You add 1 mL of potassium hexacyanoferrate (III) solution 0.125M to your sample solution.')
 
         if 'IronII' in self._ion_probe:
-            print('You can see a deep blue precipitate forming. '
+            print_slow('You can see a deep blue precipitate forming. '
                   'Even adding 5mL diluted HCL does not seem to dissolve the precipitate.')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_iron3(self):
-        print('You mix a few drops of sample solution with a drop of KSCN solution.')
+        print_slow('You mix a few drops of sample solution with a drop of KSCN solution.')
 
         if 'IronIII' in self._ion_probe:
-            print('The colour of the solution turned red!')
+            print_slow('The colour of the solution turned red!')
         else:
-            print('No colour change is observable...')
+            print_slow('No colour change is observable...')
 
     def test_cobalt(self):
-        print('You add a little KSCN to your sample solution.')
+        print_slow('You add a little KSCN to your sample solution.')
 
         if 'Cobalt' in self._ion_probe:
-            print('The colour changes to blue!')
+            print_slow('The colour changes to blue!')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_nickel(self):
-        print('You add NaOH to your sample solution.')
+        print_slow('You add NaOH to your sample solution.')
 
         if 'Nickel' in self._ion_probe:
-            print('You can observe a green precipitate forming.')
+            print_slow('You can observe a green precipitate forming.')
         else:
-            print('Nothing seems to happen...')
+            print_slow('Nothing seems to happen...')
 
     def test_potassium(self):
-        print('You mix approx. 1 mL of perchloricacid to your sample substance.'
+        print_slow('You mix approx. 1 mL of perchloricacid to your sample substance.'
               'In the next step you have to heat the solution...')
 
         heating = input('Heat the solution fast or slow? ')
         if heating == 'fast':
-            return print('Congratulations! You did not read the instructions and blew up the laboratory. '
+            return print_slow('Congratulations! You did not read the instructions and blew up the laboratory. '
                          'This is not good...')
 
         if 'Potassium' in self._ion_probe:
-            print('After cooling, you see white crystals forming. What could that be?')
+            print_slow('After cooling, you see white crystals forming. What could that be?')
         else:
-            print('You let the solution cool down, but nothing happened.')
+            print_slow('You let the solution cool down, but nothing happened.')
