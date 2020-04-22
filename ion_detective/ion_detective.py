@@ -19,10 +19,14 @@ class IonDetective:
         self._ion_probe = random.sample(ion_list, k=3)
 
     def get_answers(self, your_solutions: list):
+        assert len(your_solutions) == 3, ValueError('You can only submit 3 solutions!')
+
         points = 0
+        correct_ions = []
         for ion in your_solutions:
-            if ion in self._ion_probe:
+            if ion in self._ion_probe and ion not in correct_ions:
                 points += 1
+                correct_ions.append(ion)
         print_slow(f'You achieved {points} out of 3 points!')
 
     def list_anion_tests(self):
