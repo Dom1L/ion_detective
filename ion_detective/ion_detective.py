@@ -88,18 +88,32 @@ class IonDetective:
             print('You can observe a brown-ish ring form at the phase boundary.')
 
     def test_phosphate(self):
-        print('If a spatula tip substance is dissolved in 1 mL of water, acidified with diluted HNO3and mixed with 2 mL molybdate-vanadate '
-              'reagent, a yellow colouring occurs. When heated, the yellow colour intensifies.(NH4)2MoO4/(NH4)3VO4 forms '
-              'with phosphate ions in neutral to nitric acid solutionorange colored anions of mixed heteropolyacid[PV2Mo10O40]5−.'
-              'This reaction is considered to be the best colorimetric method for the determination of phosphates. '
-              'The molybdate-vanadate reagent has only a limited shelf life (maximum of one day), '
-              'needs to be remanufactured regularly (therefore never produce too large quantities) and '
-              'regularly checked by negative image samples. Failure to do so may result inpositive results even though '
-              'there is no phosphate in the sample')
+        random_failure = 0
+        print('A spatula tip of substance has to be dissolved in 1 mL of water, acidified with diluted HNO3 and mixed with'
+              '2 mL molybdate-vanadate.')
+
+        yes_no = input('Make a new batch of molybdate-vanadate? Yes/No: ')
+        if yes_no is 'No':
+            random_failure += 0.66
+
+        if 'Phosphate' in self._ion_probe or decision(random_failure):
+            print('A yellow colouring occures. You slowly heat the solution and the colour intensifies!')
+        else:
+            print('The colour of your solution does not seem to change at all...')
 
     def test_sulphate(self):
-        print('Approx. 3 mL sample solution are acidified well with diluted hydrochloric acid 2Mand mixed with 1 mL barium (II) '
-              'chloride solution 0.25M. A white precipitation occurs.')
+        print('You start with approx. 3 mL sample solution. You are unsure whether you have to acidify or basify your solution')
+
+        acid_base = input('Acidify/Basify: ')
+        if acid_base is 'Basify':
+            return print('You add NaOH and mix with 1 mL barium (II) chloride solution 0.25M, but nothings seems to happen...')
+        else:
+            print('You acidify your solution with diluted hydrochloric acid 2M and mix with 1 mL barium (II) chloride solution 0.25M.')
+
+        if 'Sulphate' in self._ion_probe:
+            print('You can see a white precipitate!')
+        else:
+            print('Nothing seems to happen...')
 
     # Cation Test
     def test_copper(self):
