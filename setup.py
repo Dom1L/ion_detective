@@ -5,6 +5,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
      name='ion_detective',  
      version='0.1',
+     license = 'gpl-3.0', 
      author="Dominik Lemm",
      author_email="lemm92.d@gmail.com",
      description="Virtual laboratory for chemistry students to simulate qualitative ion analysis.",
@@ -14,7 +15,6 @@ setuptools.setup(
      packages=setuptools.find_packages(),
      classifiers=[
          "Programming Language :: Python :: 3",
-         "License :: OSI Approved :: GNU License",
          "Operating System :: OS Independent",
      ],
  )
