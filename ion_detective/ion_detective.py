@@ -9,7 +9,7 @@ class IonDetective:
 
     def generate_probe(self, ion_type: str, seed: int):
         random.seed(seed)
-        if ion_type == 'anion':
+        if ion_type == 'anions':
             ion_list = anions
         elif ion_type == 'cations':
             ion_list = cations
@@ -28,6 +28,10 @@ class IonDetective:
                 points += 1
                 correct_ions.append(ion)
         print_slow(f'You achieved {points} out of 3 points!')
+
+    def list_ions(self):
+        print(f'Anions: {anions}\n')
+        print(f'Cations: {cations}')
 
     def list_anion_tests(self):
         print('test_acetate(), \n'
@@ -50,9 +54,9 @@ class IonDetective:
               'test_potassium()'
               )
 
-    # Anion Test
+    # Anion Tests
     def test_acetate(self):
-        print_slow('A spatula tip of the substance has to be rubbed into the mortar with KHSO4. \n')
+        print_slow('You rub a spatula tip of your substans into the mortar with KHSO4. \n')
 
         value = input('How much KHSO4 do you want to add? x times more than substance: x?')
 
@@ -80,7 +84,7 @@ class IonDetective:
             random_failure += 0.3
 
         print_slow('The test tube is quickly sealed with a stopper,'
-                   'which carries a gas absorptiontube (filled with barium hydroxide solution). \n')
+                   'which carries a gas absorption tube (filled with barium hydroxide solution). \n')
 
         print_immersive_dots()
 
@@ -123,8 +127,8 @@ class IonDetective:
 
     def test_phosphate(self):
         random_failure = 0
-        print_slow('A spatula tip of substance has to be dissolved in 1 mL of water, \n'
-                   'acidified with diluted HNO3 and mixed with 2 mL molybdate-vanadate. \n')
+        print_slow('You dissolve a spatula tip of your substance in 1 mL of water. \n'
+                   'After that, you acidify your solution with diluted HNO3 and mix with 2 mL molybdate-vanadate. \n')
 
         yes_no = input('Make a new batch of molybdate-vanadate? Yes/No: ')
         if yes_no is 'No':
@@ -159,8 +163,8 @@ class IonDetective:
 
     # Cation Test
     def test_copper(self):
-        print_slow('A magnesia stick is annealed in the Bunsen burner flame. \n'
-                   'With the still hot rod, some of the substance is absorbed and kept in the burner flame. \n')
+        print_slow('You anneal a magnesia stick in the Bunsen burner flame. \n'
+                   'With the still hot rod, some of your substance is absorbed and kept in the burner flame. \n')
 
         print_immersive_dots()
 
@@ -170,8 +174,8 @@ class IonDetective:
             print_slow('Nothing seems to happen...')
 
     def test_calcium(self):
-        print_slow('A magnesia stick is annealed in the Bunsen burner flame. \n'
-                   'With the still hot rod, some of the substance is absorbed and kept in the burner flame.\n')
+        print_slow('You anneal a magnesia stick in the Bunsen burner flame. \n'
+                   'With the still hot rod, some of your substance is absorbed and kept in the burner flame. \n')
 
         print_immersive_dots()
 
@@ -181,8 +185,8 @@ class IonDetective:
             print_slow('Nothing seems to happen...')
 
     def test_sodium(self):
-        print_slow('A magnesia stick is annealed in the Bunsen burner flame. \n'
-                   'With the still hot rod, some of the substance is absorbed and kept in the burner flame.')
+        print_slow('You anneal a magnesia stick in the Bunsen burner flame. \n'
+                   'With the still hot rod, some of your substance is absorbed and kept in the burner flame. \n')
 
         print_immersive_dots()
 
@@ -192,13 +196,19 @@ class IonDetective:
             print_slow('Nothing seems to happen...')
 
     def test_aluminum(self):
+        random_failure = 0
         print_slow('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL thioacetamid reagent. \n'
-                   'Occuring precipitate is being filtered. \n'
-                   'You start adding drops of diluted NaOH solution. \n')
+                   'You see precipitate forming...')
 
+        yes_no = input('Filter precipitate? Yes/No')
+
+        if yes_no.lower() == 'no':
+            random_failure += 0.33
+
+        print_slow('You start adding drops of diluted NaOH solution. \n')
         print_immersive_dots()
 
-        if 'Aluminum' in self._ion_probe:
+        if 'Aluminum' in self._ion_probe or not decision(random_failure):
             print_slow('You can see a gelatinous precipitate. \n'
                        'It dissolves once you add more NaOH. \n'
                        'After adding ammonium chloride solution, '
@@ -207,13 +217,13 @@ class IonDetective:
             print_slow('You add more and more solution, but nothing seems to happen (besides the change in pH).')
 
     def test_iron2(self):
-        print_slow('You add 1 mL of potassium hexacyanoferrate (III) solution 0.125M to your sample solution. \n')
+        print_slow('You add 1 mL of potassium hexacyanoferrate (III) 0.125M to your sample solution. \n')
 
         print_immersive_dots()
 
         if 'IronII' in self._ion_probe:
             print_slow('You can see a deep blue precipitate forming. \n'
-                       'Even adding 5mL diluted HCL does not seem to dissolve the precipitate!')
+                       'Even adding 5 mL diluted HCL does not seem to dissolve the precipitate!')
         else:
             print_slow('Nothing seems to happen...')
 
