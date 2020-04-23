@@ -74,8 +74,10 @@ class IonDetective:
     def test_carbonate(self):
         random_failure = 0
         print_slow('You have to mix your substance with a couple of drops of HCl 2M. \n')
-        mg_value = input('How much substance do you use? Mg: ')
-        drop_value = input('How many drops of 2M HCL do you use? Approximate amount of drops: ')
+        mg_value = input('How much substance do you use? \n'
+                         'Mg: ')
+        drop_value = input('How many drops of 2M HCL do you use? Approximate amount of drops: \n'
+                           ' ')
 
         print_immersive_dots()
 
@@ -99,7 +101,8 @@ class IonDetective:
         random_failure = 0
         print_slow('Dissolve a spatula tip of the sample substance in x mL water and acidify it with diluted nitric acid 2M. \n')
 
-        ml_value = input('How much water do you want to add? mL: ')
+        ml_value = input('How much water do you want to add? \n'
+                         'mL: ')
         if int(ml_value) != 2:
             random_failure += 0.2
 
@@ -131,7 +134,8 @@ class IonDetective:
         print_slow('You dissolve a spatula tip of your substance in 1 mL of water. \n'
                    'After that, you acidify your solution with diluted HNO3 and mix with 2 mL molybdate-vanadate. \n')
 
-        yes_no = input('Make a new batch of molybdate-vanadate? Yes/No: ')
+        yes_no = input('Make a new batch of molybdate-vanadate? \n'
+                       'Yes/No: ')
         if yes_no is 'No':
             random_failure += 0.66
 
@@ -201,7 +205,8 @@ class IonDetective:
         print_slow('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL thioacetamid reagent. \n'
                    'You see precipitate forming...')
 
-        yes_no = input('Filter precipitate? Yes/No')
+        yes_no = input('Filter precipitate? Yes/No: \n'
+                       ' ')
 
         if yes_no.lower() == 'no':
             random_failure += 0.33
@@ -262,7 +267,8 @@ class IonDetective:
         print_slow('You mix approx. 1 mL of perchloricacid to your sample substance. \n'
                    'In the next step you have to heat the solution... \n')
 
-        heating = input('Heat the solution fast or slow? ')
+        heating = input('Heat the solution fast or slow? \n'
+                        ' ')
 
         print_immersive_dots()
 
