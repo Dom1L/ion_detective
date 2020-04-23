@@ -56,9 +56,10 @@ class IonDetective:
 
     # Anion Tests
     def test_acetate(self):
-        print_slow('You rub a spatula tip of your substans into the mortar with KHSO4. \n')
+        print_slow('You rub a spatula tip of your substance into the mortar with KHSO4. \n')
 
-        value = input('How much KHSO4 do you want to add? x times more than substance: x?')
+        value = input('How much KHSO4 do you want to add? x times more than substance: \n'
+                      'x=')
 
         print_immersive_dots()
 
