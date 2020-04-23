@@ -5,7 +5,7 @@ from ion_detective.utils import anions, cations, decision, print_slow, print_imm
 
 class IonDetective:
     def __init__(self):
-        self._ion_probe = None
+        self.__ion_probe = None
 
     def generate_probe(self, ion_type: str, seed: int):
         random.seed(seed)
@@ -16,7 +16,7 @@ class IonDetective:
         else:
             raise ValueError('Know your ion type!')
         # should be encrypted somehow
-        self._ion_probe = random.sample(ion_list, k=3)
+        self.__ion_probe = random.sample(ion_list, k=3)
 
     def get_answers(self, your_solutions: list):
         assert len(your_solutions) == 3, ValueError('You can only submit 3 solutions!')
@@ -24,7 +24,7 @@ class IonDetective:
         points = 0
         correct_ions = []
         for ion in your_solutions:
-            if ion in self._ion_probe and ion not in correct_ions:
+            if ion in self.__ion_probe and ion not in correct_ions:
                 points += 1
                 correct_ions.append(ion)
         print_slow(f'You achieved {points} out of 3 points!')
@@ -66,7 +66,7 @@ class IonDetective:
         if int(value) < 4:
             return print_slow('You smell nothing...')
 
-        if 'Acetate' in self._ion_probe:
+        if 'Acetate' in self.__ion_probe:
             print_slow('It smells like vinegar....')
         else:
             print_slow('You smell nothing...')
@@ -91,7 +91,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Carbonate' not in self._ion_probe or decision(random_failure):
+        if 'Carbonate' not in self.__ion_probe or decision(random_failure):
             return print_slow('Nothing seems to happen...')
         else:
             print_slow('The mixture flares up and delivers a colorless and odourless gas. \n'
@@ -112,7 +112,7 @@ class IonDetective:
         print_slow('After waiting a couple of minutes, you add 1.5 mL NH3-solution 10M. \n')
         print_immersive_dots()
 
-        if 'Iodide' not in self._ion_probe or decision(random_failure):
+        if 'Iodide' not in self.__ion_probe or decision(random_failure):
             print_slow('Nothing seems to happen...')
         else:
             print_slow('You see a pale yellow precipitate. You start shaking heavily, but it does not seem to dissolve.')
@@ -124,7 +124,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Nitrate' not in self._ion_probe:
+        if 'Nitrate' not in self.__ion_probe:
             print_slow('Nothing seems to happen...')
         else:
             print_slow('You can observe a brown-ish ring form at the phase boundary.')
@@ -141,7 +141,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Phosphate' in self._ion_probe or decision(random_failure):
+        if 'Phosphate' in self.__ion_probe or decision(random_failure):
             print_slow('A yellow colouring occures. You slowly heat the solution and the colour intensifies!')
         else:
             print_slow('The colour of your solution does not seem to change at all...')
@@ -161,7 +161,7 @@ class IonDetective:
             print_slow('You acidify your solution with diluted hydrochloric acid 2M and '
                        'mix with 1 mL barium (II) chloride solution 0.25M. \n')
 
-        if 'Sulphate' in self._ion_probe:
+        if 'Sulphate' in self.__ion_probe:
             print_slow('You can see a white precipitate!')
         else:
             print_slow('Nothing seems to happen...')
@@ -173,7 +173,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Copper' in self._ion_probe:
+        if 'Copper' in self.__ion_probe:
             print_slow('You can see a green flame!')
         else:
             print_slow('Nothing seems to happen...')
@@ -184,7 +184,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Calcium' in self._ion_probe:
+        if 'Calcium' in self.__ion_probe:
             print_slow('You can see a brick-red flame! That has to mean something...')
         else:
             print_slow('Nothing seems to happen...')
@@ -195,7 +195,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Sodium' in self._ion_probe:
+        if 'Sodium' in self.__ion_probe:
             print_slow('You can see a yellow flame, what could that be?')
         else:
             print_slow('Nothing seems to happen...')
@@ -214,7 +214,7 @@ class IonDetective:
         print_slow('You start adding drops of diluted NaOH solution. \n')
         print_immersive_dots()
 
-        if 'Aluminum' in self._ion_probe or not decision(random_failure):
+        if 'Aluminum' in self.__ion_probe or not decision(random_failure):
             print_slow('You can see a gelatinous precipitate. \n'
                        'It dissolves once you add more NaOH. \n'
                        'After adding ammonium chloride solution, '
@@ -227,7 +227,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'IronII' in self._ion_probe:
+        if 'IronII' in self.__ion_probe:
             print_slow('You can see a deep blue precipitate forming. \n'
                        'Even adding 5 mL diluted HCL does not seem to dissolve the precipitate!')
         else:
@@ -238,7 +238,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'IronIII' in self._ion_probe:
+        if 'IronIII' in self.__ion_probe:
             print_slow('The colour of the solution turned red!')
         else:
             print_slow('No colour change is observable...')
@@ -248,7 +248,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Cobalt' in self._ion_probe:
+        if 'Cobalt' in self.__ion_probe:
             print_slow('The colour changes to blue!')
         else:
             print_slow('Nothing seems to happen...')
@@ -258,7 +258,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Nickel' in self._ion_probe:
+        if 'Nickel' in self.__ion_probe:
             print_slow('You can observe a green precipitate forming.')
         else:
             print_slow('Nothing seems to happen...')
@@ -276,7 +276,7 @@ class IonDetective:
             return print_slow('Congratulations! You did not read the instructions and blew up the laboratory. \n'
                               'This is not good...')
 
-        if 'Potassium' in self._ion_probe:
+        if 'Potassium' in self.__ion_probe:
             print_slow('After cooling, you see white crystals forming. What could that be?')
         else:
             print_slow('You let the solution cool down, but nothing happened.')

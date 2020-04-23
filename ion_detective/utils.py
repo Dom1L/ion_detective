@@ -1,14 +1,9 @@
-import base64
 import random
 import sys
 import time
 
 anions = ['Acetate', 'Carbonate', 'Iodide', 'Nitrate', 'Phosphate', 'Sulphate']
 cations = ['Aluminum', 'Calcium', 'Copper', 'IronII', 'IronIII', 'Cobalt', 'Nickel', 'Potassium', 'Sodium']
-
-
-def _obfuscator(secret, compare):
-    pass
 
 
 def decision(probability):
