@@ -1,6 +1,7 @@
+import re
 import random
 
-from ion_detective.utils import anions, cations, decision, print_slow, print_immersive_dots
+from ion_detective.utils import anions, cations, decision, print_slow, print_immersive_dots, check_number, check_text
 
 
 class IonDetective:
@@ -58,12 +59,15 @@ class IonDetective:
     def test_acetate(self):
         print_slow('You rub a spatula tip of your substance into the mortar with KHSO4. \n')
 
-        value = input('How much KHSO4 do you want to add? x times more than substance: \n'
-                      'x=')
+        value = None
+        while value is None:
+            value = input('How much KHSO4 do you want to add? x times more than substance: \n'
+                          'x=')
+            value = check_number(value, data_type=float, suggestion='a number')
 
         print_immersive_dots()
 
-        if int(value) < 4:
+        if value < 4:
             return print_slow('You smell nothing...')
 
         if 'Acetate' in self.__ion_probe:
@@ -74,19 +78,27 @@ class IonDetective:
     def test_carbonate(self):
         random_failure = 0
         print_slow('You have to mix your substance with a couple of drops of HCl 2M. \n')
-        mg_value = input('How much substance do you use? \n'
-                         'Mg: ')
-        drop_value = input('How many drops of 2M HCL do you use? Approximate amount of drops: \n'
-                           ' ')
 
+        value = None
+        while value is None:
+            value = input('How much substance do you use? \n'
+                          'Mg: ')
+            value = check_number(value, data_type=float, suggestion='a number')
+        if value != 10:
+            random_failure += 0.3
         print_immersive_dots()
 
-        if int(mg_value) != 10:
-            random_failure += 0.3
-        if not 5 <= int(drop_value) <= 10:
-            random_failure += 0.3
+        value = None
+        while value is None:
+            value = input('How many drops of 2M HCL do you use? Approximate amount of drops: \n'
+                          ' ')
+            value = check_number(value, data_type=float, suggestion='a number')
 
-        print_slow('The test tube is quickly sealed with a stopper,'
+        if not 5 <= value <= 10:
+            random_failure += 0.3
+        print_immersive_dots()
+
+        print_slow('The test tube is quickly sealed with a stopper, '
                    'which carries a gas absorption tube (filled with barium hydroxide solution). \n')
 
         print_immersive_dots()
@@ -99,11 +111,16 @@ class IonDetective:
 
     def test_iodide(self):
         random_failure = 0
-        print_slow('Dissolve a spatula tip of the sample substance in x mL water and acidify it with diluted nitric acid 2M. \n')
+        print_slow(
+            'Dissolve a spatula tip of the sample substance in x mL water and acidify it with diluted nitric acid 2M. \n')
 
-        ml_value = input('How much water do you want to add? \n'
-                         'mL: ')
-        if int(ml_value) != 2:
+        value = None
+        while value is None:
+            value = input('How much water do you want to add? \n'
+                          'mL: ')
+            value = check_number(value, data_type=float, suggestion='a number')
+
+        if value != 2:
             random_failure += 0.2
 
         print_immersive_dots()
@@ -115,7 +132,8 @@ class IonDetective:
         if 'Iodide' not in self.__ion_probe or decision(random_failure):
             print_slow('Nothing seems to happen...')
         else:
-            print_slow('You see a pale yellow precipitate. You start shaking heavily, but it does not seem to dissolve.')
+            print_slow(
+                'You see a pale yellow precipitate. You start shaking heavily, but it does not seem to dissolve.')
 
     def test_nitrate(self):
         print_slow('In a test tube a few drops of your sample solution are mixed with about the same amount of \n'
@@ -134,9 +152,14 @@ class IonDetective:
         print_slow('You dissolve a spatula tip of your substance in 1 mL of water. \n'
                    'After that, you acidify your solution with diluted HNO3 and mix with 2 mL molybdate-vanadate. \n')
 
-        yes_no = input('Make a new batch of molybdate-vanadate? \n'
-                       'Yes/No: ')
-        if yes_no is 'No':
+        value = None
+        while value is None:
+            value = input('Make a new batch of molybdate-vanadate? \n'
+                          'yes/no: ')
+            value = re.sub('[^A-Za-z]+', '', value.lower().strip())
+            value = check_text(value, options=['yes', 'no'], suggestion='yes or no')
+
+        if value is 'no':
             random_failure += 0.66
 
         print_immersive_dots()
@@ -150,11 +173,15 @@ class IonDetective:
         print_slow('You start with approx. 3 mL sample solution. \n'
                    'You are unsure whether you have to acidify or basify your solution... \n')
 
-        acid_base = input('Acidify/Basify: ')
+        value = None
+        while value is None:
+            value = input('acidify/basify: ')
+            value = re.sub('[^A-Za-z]+', '', value.lower().strip())
+            value = check_text(value, options=['acidify', 'basify'], suggestion='acidify or basify')
 
         print_immersive_dots()
 
-        if acid_base is 'Basify':
+        if value is 'basify':
             return print_slow(
                 'You add NaOH and mix with 1 mL barium (II) chloride solution 0.25M, but nothings seems to happen...')
         else:
@@ -205,10 +232,14 @@ class IonDetective:
         print_slow('You mix approx. 2 mL solution with 0.5 mL diluted HCL and 0.5 mL thioacetamid reagent. \n'
                    'You see precipitate forming...')
 
-        yes_no = input('Filter precipitate? Yes/No: \n'
-                       ' ')
+        value = None
+        while value is None:
+            value = input('Filter precipitate? yes/no: \n'
+                          ' ')
+            value = re.sub('[^A-Za-z]+', '', value.lower().strip())
+            value = check_text(value, options=['yes', 'no'], suggestion='yes or no')
 
-        if yes_no.lower() == 'no':
+        if value == 'no':
             random_failure += 0.33
 
         print_slow('You start adding drops of diluted NaOH solution. \n')
@@ -267,12 +298,16 @@ class IonDetective:
         print_slow('You mix approx. 1 mL of perchloricacid to your sample substance. \n'
                    'In the next step you have to heat the solution... \n')
 
-        heating = input('Heat the solution fast or slow? \n'
-                        ' ')
+        value = None
+        while value is None:
+            value = input('Heat the solution fast or slow? \n'
+                          ' ')
+            value = re.sub('[^A-Za-z]+', '', value.lower().strip())
+            value = check_text(value, options=['fast', 'slow'], suggestion='fast or slow')
 
         print_immersive_dots()
 
-        if heating == 'fast':
+        if value == 'fast':
             return print_slow('Congratulations! You did not read the instructions and blew up the laboratory. \n'
                               'This is not good...')
 
