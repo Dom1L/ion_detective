@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='ion_detective',  
-     version='0.1.5',
+     version='0.1.7',
      license = 'gpl-3.0', 
      author="Dominik Lemm",
      author_email="lemm92.d@gmail.com",

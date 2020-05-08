@@ -9,6 +9,7 @@ class IonDetective:
         self.__ion_probe = None
         self.__seed = None
         self.__answer_counter = 0
+        print('IonDetective initialized! Call .generate_probe() to start!')
 
     def generate_probe(self, ion_type: str, seed: int):
         random.seed(seed)
@@ -18,8 +19,11 @@ class IonDetective:
         elif ion_type == 'cations':
             ion_list = cations
         else:
-            raise ValueError('Know your ion type!')
+            raise ValueError('Know your ion type! Use either anions or cations')
         self.__ion_probe = random.sample(ion_list, k=3)
+        print('Probe generated, now perform some experiments!\n')
+        print('Use .list_ions() to see which ions are available.\n')
+        print('Use .list_anion_tests or .list_cation_tests to see which experiments can be performed\n')
 
     def get_answers(self, your_solutions: list):
         if self.__answer_counter >= 1:
