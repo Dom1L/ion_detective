@@ -7,9 +7,12 @@ from ion_detective.utils import anions, cations, decision, print_slow, print_imm
 class IonDetective:
     def __init__(self):
         self.__ion_probe = None
+        self.__seed = None
+        self.__answer_counter = 0
 
     def generate_probe(self, ion_type: str, seed: int):
         random.seed(seed)
+        self.__seed = seed
         if ion_type == 'anions':
             ion_list = anions
         elif ion_type == 'cations':
@@ -20,7 +23,15 @@ class IonDetective:
         self.__ion_probe = random.sample(ion_list, k=3)
 
     def get_answers(self, your_solutions: list):
-        assert len(your_solutions) == 3, ValueError('You can only submit 3 solutions!')
+        if self.__answer_counter >= 1:
+            print('You can only get your answers once!')
+            return None
+        elif self.__seed > 100:
+            print('Only seeds lower than 100 can be used with this function!')
+            return None
+        elif len(your_solutions) > 3:
+            print('You should not submit more than 3 answers!')
+            return None
 
         points = 0
         correct_ions = []
@@ -29,6 +40,7 @@ class IonDetective:
                 points += 1
                 correct_ions.append(ion)
         print_slow(f'You achieved {points} out of 3 points!')
+        self.__answer_counter += 1
 
     def list_ions(self):
         print(f'Anions: {anions}\n')
