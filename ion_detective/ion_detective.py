@@ -19,7 +19,6 @@ class IonDetective:
             ion_list = cations
         else:
             raise ValueError('Know your ion type!')
-        # should be encrypted somehow
         self.__ion_probe = random.sample(ion_list, k=3)
 
     def get_answers(self, your_solutions: list):
