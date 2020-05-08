@@ -23,7 +23,7 @@ class IonDetective:
         self.__ion_probe = random.sample(ion_list, k=3)
         print('Probe generated, now perform some experiments!\n')
         print('Use .list_ions() to see which ions are available.\n')
-        print('Use .list_anion_tests or .list_cation_tests to see which experiments can be performed\n')
+        print('Use .list_anion_tests() or .list_cation_tests() to see which experiments can be performed\n')
 
     def get_answers(self, your_solutions: list):
         if self.__answer_counter >= 1:
