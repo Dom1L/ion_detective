@@ -6,10 +6,30 @@ from ion_detective.utils import anions, cations, decision, print_slow, print_imm
 
 class IonDetective:
     def __init__(self):
-        self._ion_probe = None
+        self.__ion_probe = None
         self.__seed = None
         self.__answer_counter = 0
         print('IonDetective initialized! Call .generate_probe() to start!')
+
+    def __test_student_files(self):
+        with open('student_answers.txt') as infile:
+            lines = infile.readlines()[1:]
+
+        for line in lines:
+            seed = int(line.split('\t')[2])
+            _anions = line.split('\t')[3].strip()
+            self.generate_probe('anions', seed)
+            if _anions == str(self.__ion_probe):
+                print('True')
+            else:
+                return None
+            _cations = line.split('\t')[4].strip()
+            self.generate_probe('cations', seed)
+            if _cations == str(self.__ion_probe):
+                print('True')
+            else:
+                return None
+        print('all correct')
 
     def generate_probe(self, ion_type: str, seed: int):
         random.seed(seed)
