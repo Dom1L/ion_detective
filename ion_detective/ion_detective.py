@@ -6,7 +6,7 @@ from ion_detective.utils import anions, cations, decision, print_slow, print_imm
 
 class IonDetective:
     def __init__(self):
-        self.__ion_probe = None
+        self._ion_probe = None
         self.__seed = None
         self.__answer_counter = 0
         print('IonDetective initialized! Call .generate_probe() to start!')
@@ -118,7 +118,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Carbonate' not in self.__ion_probe or decision(random_failure):
+        if 'Carbonate' not in self.__ion_probe:
             return print_slow('Nothing seems to happen...')
         else:
             print_slow('The mixture flares up and delivers a colorless and odourless gas. \n'
@@ -144,7 +144,7 @@ class IonDetective:
         print_slow('After waiting a couple of minutes, you add 1.5 mL NH3-solution 10M. \n')
         print_immersive_dots()
 
-        if 'Iodide' not in self.__ion_probe or decision(random_failure):
+        if 'Iodide' not in self.__ion_probe:
             print_slow('Nothing seems to happen...')
         else:
             print_slow(
@@ -179,7 +179,7 @@ class IonDetective:
 
         print_immersive_dots()
 
-        if 'Phosphate' in self.__ion_probe or decision(random_failure):
+        if 'Phosphate' in self.__ion_probe:
             print_slow('A yellow colouring occures. You slowly heat the solution and the colour intensifies!')
         else:
             print_slow('The colour of your solution does not seem to change at all...')
@@ -260,7 +260,7 @@ class IonDetective:
         print_slow('You start adding drops of diluted NaOH solution. \n')
         print_immersive_dots()
 
-        if 'Aluminum' in self.__ion_probe or not decision(random_failure):
+        if 'Aluminum' in self.__ion_probe:
             print_slow('You can see a gelatinous precipitate. \n'
                        'It dissolves once you add more NaOH. \n'
                        'After adding ammonium chloride solution, '
